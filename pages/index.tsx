@@ -1,8 +1,7 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import '../node_modules/antd/dist/antd.css';
+import Login from "../components/Login";
+
 // const Home: NextPage = () => {
 //   return (
  import React, { useState } from 'react';
@@ -27,6 +26,8 @@ import '../node_modules/antd/dist/antd.css';
      setComponentSize(size);
    };
    return (
+     <div>
+      <Login/>
      <Form
        labelCol={{ span: 4 }}
        wrapperCol={{ span: 14 }}
@@ -86,6 +87,7 @@ import '../node_modules/antd/dist/antd.css';
          <Button>Button</Button>
        </Form.Item>
      </Form>
+     </div>
    );
  };
 
