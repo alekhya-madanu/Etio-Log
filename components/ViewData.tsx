@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import '../node_modules/antd/dist/antd.css';
 import { supabase } from '../lib/initSupabase'
 import { Slider } from 'antd';
@@ -14,7 +14,7 @@ import Login from "../components/Login";
 
 // const Home: NextPage = () => {
 //   return (
- import React, { useState } from 'react';
+ import React from 'react';
  import {
    Form,
    Input,
@@ -31,73 +31,37 @@ import Login from "../components/Login";
 
  type SizeType = Parameters<typeof Form>[0]['size'];
 
- const MainForm: NextPage = () => {
-   const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
-  const onFinish = async (values: any) => {
+ const MainForm: NextPage =  () => {
+    const [data, setData] = useState<any[] | null>([])
+    useEffect(() => {
+      // Some synchronous code.
+  
+      (async () => {
+          await fetchData();
+      })();
 
-    var date:string = values['date'].format('MM/DD/YYYY');
+  }, []);
+  const fetchData = async () => {
 
-    var time:string = values['time'].format('hh:mm:ss A ZZ');
-    delete values['time'];
 
-    values['date']= date+" "+time;
-    console.log(values);
-    const { data, error } = await supabase
-      .from('MoodData')
-      .insert([
-        values,
-      ])
-    console.log(data);
+let { data: MoodData, error } = await supabase
+  .from('MoodData')
+  .select('*')
+  .order('date')
+
+  console.table(MoodData)
+
     if(error){
         console.error(error);
+    }else{
+        setData(MoodData)
     }
-  };
+    };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
-     const [session, setSession] = useState(null)
-
-     useEffect(() => {
-       setSession(supabase.auth.session())
-
-       supabase.auth.onAuthStateChange((_event, session) => {
-         setSession(session)
-       })
-     }, [])
-    const onLogout = () => setSession(null)
    return (
-     <div>
-      <Login login={session!=null} onLogout={onLogout}/>
-     <Form
-       labelCol={{ span: 4 }}
-       wrapperCol={{ span: 14 }}
-       layout="horizontal"
-       initialValues={{ size: componentSize }}
-       onFinish={onFinish}
-       onFinishFailed={onFinishFailed}
-       size={componentSize as SizeType}
-     >
-       <Form.Item label="Mood" name="mood">
-         <Input />
-       </Form.Item>
-       <Form.Item label="Intensity" name="intensity">
-            <Slider tipFormatter={formatter} />
-
-       </Form.Item>
-
-       <Form.Item label="DatePicker" name="date">
-         <DatePicker />
-       </Form.Item>
-       <Form.Item label="Time" name="time">
-         <TimePicker />
-       </Form.Item>
-
-       <Form.Item>
-         <Button type="primary" htmlType="submit">Submit</Button>
-       </Form.Item>
-     </Form>
-     </div>
+    <div>
+    {data?data.map(d => <div key={d.id}>{`mood is ${d.mood}, intensity is ${d.intensity}`}</div>):<div></div>}
+    </div>
    );
  };
 

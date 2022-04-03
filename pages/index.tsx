@@ -1,94 +1,75 @@
 import type { NextPage } from 'next'
+import { useEffect } from 'react'
 import '../node_modules/antd/dist/antd.css';
+import { supabase } from '../lib/initSupabase'
+import React, { useState } from 'react';
 import Login from "../components/Login";
+import HomeForm from "../components/HomeForm"
+import ViewData from "../components/ViewData"
 
-// const Home: NextPage = () => {
-//   return (
- import React, { useState } from 'react';
- import {
-   Form,
-   Input,
-   Button,
-   Radio,
-   Select,
-   Cascader,
-   DatePicker,
-   InputNumber,
-   TreeSelect,
-   Switch,
- } from 'antd';
+import { Layout, Menu } from 'antd';
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
 
- type SizeType = Parameters<typeof Form>[0]['size'];
+const { Header, Sider, Content } = Layout;
 
- const Home: NextPage = () => {
-   const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
-   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
-     setComponentSize(size);
-   };
-   return (
-     <div>
-      <Login/>
-     <Form
-       labelCol={{ span: 4 }}
-       wrapperCol={{ span: 14 }}
-       layout="horizontal"
-       initialValues={{ size: componentSize }}
-       onValuesChange={onFormLayoutChange}
-       size={componentSize as SizeType}
-     >
-       <Form.Item label="Form Size" name="size">
-         <Radio.Group>
-           <Radio.Button value="small">Small</Radio.Button>
-           <Radio.Button value="default">Default</Radio.Button>
-           <Radio.Button value="large">Large</Radio.Button>
-         </Radio.Group>
-       </Form.Item>
-       <Form.Item label="Input">
-         <Input />
-       </Form.Item>
-       <Form.Item label="Select">
-         <Select>
-           <Select.Option value="demo">Demo</Select.Option>
-         </Select>
-       </Form.Item>
-       <Form.Item label="TreeSelect">
-         <TreeSelect
-           treeData={[
-             { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
-           ]}
-         />
-       </Form.Item>
-       <Form.Item label="Cascader">
-         <Cascader
-           options={[
-             {
-               value: 'zhejiang',
-               label: 'Zhejiang',
-               children: [
-                 {
-                   value: 'hangzhou',
-                   label: 'Hangzhou',
-                 },
-               ],
-             },
-           ]}
-         />
-       </Form.Item>
-       <Form.Item label="DatePicker">
-         <DatePicker />
-       </Form.Item>
-       <Form.Item label="InputNumber">
-         <InputNumber />
-       </Form.Item>
-       <Form.Item label="Switch" valuePropName="checked">
-         <Switch />
-       </Form.Item>
-       <Form.Item label="Button">
-         <Button>Button</Button>
-       </Form.Item>
-     </Form>
-     </div>
-   );
- };
+const Home: NextPage = () => {
+const [state, setState] = useState({collapsed: false})
+//   let state = {
+//     collapsed: false,
+//   };
+
+  const toggle = () => {
+    setState({
+      collapsed: !state.collapsed,
+    });
+  };
+
+
+    return (
+      <Layout>
+                  <Header className="site-layout-background" style={{ padding: 0 }}>
+            {React.createElement(state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+              className: 'trigger',
+              onClick: toggle,
+            })}
+          </Header>
+        <Sider trigger={null} collapsible collapsed={state.collapsed}>
+          <div className="logo" />
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+            <Menu.Item key="1" icon={<UserOutlined />}>
+              nav 1
+            </Menu.Item>
+            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+              nav 2
+            </Menu.Item>
+            <Menu.Item key="3" icon={<UploadOutlined />}>
+              nav 3
+            </Menu.Item>
+          </Menu>
+        </Sider>
+        <Layout className="site-layout">
+
+          <Content
+            className="site-layout-background"
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+              minHeight: 280,
+            }}
+          >
+            <HomeForm/>
+            <ViewData/>
+          </Content>
+        </Layout>
+      </Layout>
+    );
+
+}
 
 export default Home
