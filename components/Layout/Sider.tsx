@@ -1,5 +1,6 @@
 import { Menu, Layout } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import Link from 'next/link';
 
 export default function Sider() {
     return <Layout.Sider className="site-layout-background" width={200}>
@@ -10,7 +11,11 @@ export default function Sider() {
           style={{ height: '100%' }}
         >
           <Menu.SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-            <Menu.Item key="1">option1</Menu.Item>
+            <Menu.Item key="1" >
+              <Link href="/AddQuestion">
+              add question
+              </Link>
+              </Menu.Item>
             <Menu.Item key="2">option2</Menu.Item>
             <Menu.Item key="3">option3</Menu.Item>
             <Menu.Item key="4">option4</Menu.Item>

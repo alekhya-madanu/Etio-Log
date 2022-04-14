@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { supabase } from '../lib/initSupabase'
 import { Slider } from 'antd';
 import MoodCard from '../components/MoodCard';
+import Draw from '../components/Draw';
 
 const MainForm = () => {
     const [data, setData] = useState < any[] | null > ([])
@@ -28,11 +29,14 @@ const MainForm = () => {
 function renderData(data: any[] | null) {
   if (data) {
     if (data instanceof Array && data.length > 0) {
-        return data.map(d => 
-            <div key = { d.id }>
-              <MoodCard mood = {d}/>
-            </div>
+        return(
+        // data.map(d => 
+        //     <div key = { d.id }>
+              // <MoodCard mood = {d}/>
+              <Draw width={500} height={500}/>
+            // </div>
         )
+        
     }
     if (data instanceof Array && data.length === 0) {
         return <div>No data</div>
