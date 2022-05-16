@@ -1,5 +1,4 @@
 import { Mood } from "../lib/model/MoodTypes";
-import { Card } from 'antd';
 
 export default function MoodCard(props: { mood: Mood }) {
     return (

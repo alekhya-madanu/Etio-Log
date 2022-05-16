@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import '../node_modules/antd/dist/antd.css';
 import React, { useState } from 'react';
 import HomeForm from './HomeForm';
 

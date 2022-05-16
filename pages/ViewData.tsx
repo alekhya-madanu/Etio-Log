@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../lib/initSupabase'
-import { Slider } from 'antd';
 import MoodCard from '../components/MoodCard';
 import Draw from '../components/Draw';
 
