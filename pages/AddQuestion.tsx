@@ -50,7 +50,7 @@ const AddQuestion: NextPage = () => {
           time
         </h2>
         <PagedForm onSubmit={handleSubmit(onSubmit)}
-          className="mt-12 flex flex-col justify-between p-8 rounded-md bg-slate-900 bg-opacity-10 shadow-md dark:bg-opacity-30" >
+          className="mt-12 min-h-64 flex flex-col justify-between p-8 rounded-md bg-slate-900 bg-opacity-10 shadow-md dark:bg-opacity-30" >
           <InputWrapper
             name="metric"
             type="text"
@@ -95,11 +95,6 @@ const AddQuestion: NextPage = () => {
                   }
                 <Button onClick={() => setLabels([...labels,""])} icon={<PlusOutlined />}></Button>
               </Form.Item> */}
-          <div className="w-full text-center justify-end">
-            <button type="submit" className="primary mx-auto w-48 h-12">
-              Submit
-            </button>
-          </div>
         </PagedForm>
     </div>
   );
