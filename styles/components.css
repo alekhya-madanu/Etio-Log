@@ -2,33 +2,44 @@
 
 @layer components {
   .sidebar-item {
-    @apply hover:bg-gray-100 m-2 transition-colors duration-300 ease-in-out rounded-md;
+    @apply hover:bg-gray-100 transition-colors duration-300 ease-in-out rounded-md;
   }
 
   h1.page-headline {
-    @apply text-5xl font-medium mb-4 ml-1;
+    @apply text-3xl md:text-5xl font-medium mb-4 ml-1;
+    @apply dark:text-slate-200;
   }
 
   h2.page-subheadline {
-    @apply text-2xl font-light mb-4 ml-1;
+    @apply text-sm md:text-2xl font-light mb-4 ml-1;
+    @apply dark:text-slate-300;
   }
 
   button.primary {
-    @apply bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md;
+    @apply bg-orange-500 hover:bg-orange-600 text-white;
+    @apply dark:bg-teal-700 dark:hover:bg-teal-600 text-white;
+    @apply font-bold py-2 px-4 rounded-md;
     @apply transition-colors duration-500 ease-in-out;
   }
 
   button.inline {
-    @apply bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-md; 
+    @apply bg-purple-600 hover:bg-purple-700 text-white;
+    @apply dark:bg-cyan-700 dark:hover:bg-cyan-600 text-white;
+    @apply font-bold py-2 px-4 rounded-md; 
   }
 
-  .gradient-section {
-    @apply bg-gradient-to-r from-purple-100 to-orange-200 rounded-md;
+  .gradient-bg {
+    @apply bg-gradient-to-br from-[#b0a9bc] to-[#eaebd5];
+    @apply dark:from-teal-900 dark:to-zinc-900
+  }
+  .default-bg {
+    @apply bg-gray-100 dark:bg-slate-900;
   }
 
   .input-wrapper-default {
     @apply my-1;
   }
+
   .input-default {
     @apply block w-full rounded
     px-4 py-2 m-0

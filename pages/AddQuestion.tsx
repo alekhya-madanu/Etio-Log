@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import InputWrapper from "../components/InputWrapper";
-import { supabase } from "../lib/initSupabase";
-import { Question } from "../lib/model/Question";
+import InputWrapper from "../components/Form/InputWrapper";
+import PagedForm from "../components/Form/PagedForm";
+import { Question, saveQuestion } from "../lib/model/Question";
 
 type QuestionForm = {
   question: Question;
@@ -31,28 +31,26 @@ const AddQuestion: NextPage = () => {
       options: [{ label: "", id: "", index: 0 }],
     }
   });
+
   const { fields, append, remove, insert } = useFieldArray({ control, name: "options" });
   
   function clearForm() {}
 
   const onSubmit = async (question: Question) => {
-    // const { data, error } = await supabase.from("Questions").insert([question]);
+    // const { data, error } = await saveQuestion(question);
     console.log(question);
     // clearForm()
   };
 
   return (
-    <div className="max-w-screen-md mx-auto mt-24">
-      <div className="mb-12">
+    <div className="w-full h-full md:mt-32 py-10 h-128 max-w-screen-md mx-auto">
         <h1 className="page-headline">Add New Question</h1>
         <h2 className="page-subheadline">
           Each new question acts as a separate metric which you can track over
           time
         </h2>
-      </div>
-      <div className="gradient-section p-2 h-128">
-        <form onSubmit={handleSubmit(onSubmit)} 
-          className="flex flex-col m-2 h-full p-4 rounded-md bg-orange-300 bg-opacity-10">
+        <PagedForm onSubmit={handleSubmit(onSubmit)}
+          className="mt-12 flex flex-col justify-between p-8 rounded-md bg-slate-900 bg-opacity-10 shadow-md dark:bg-opacity-30" >
           <InputWrapper
             name="metric"
             type="text"
@@ -61,22 +59,26 @@ const AddQuestion: NextPage = () => {
             register={register}
             autoFocus
           />
-          {fields.map((option, i) => (
-            <InputWrapper
-              name={option.id}
-              key={option.id}
-              placeholder="Enter option"
-              // error={questionForm.errors?.options?.message}
-              register={register}
-              registerAs={`options.${i}.value`}
-            />
-          ))}
-          <button
-            className="inline"
-            onClick={() => append({ label: "", id: "", index: 0 })}
-          >
-            Add Option
-          </button>
+          <div className="pl-12">
+            {fields.map((option, i) => (
+              <InputWrapper
+                name={option.id}
+                key={option.id}
+                placeholder="Enter option"
+                // error={questionForm.errors?.options?.message}
+                register={register}
+                registerAs={`options.${i}.value`}
+              />
+            ))}
+            <button
+              className="inline my-1"
+              onClick={() =>
+                append({ label: "", id: "", index: fields.length })
+              }
+            >
+              Add Option
+            </button>
+          </div>
           {/* <button onClick={() => setOptions([...options,""])} icon={<PlusOutlined />}></button> */}
 
           {/* <Form.Item label="Minimum" name="intensityLow">
@@ -93,14 +95,12 @@ const AddQuestion: NextPage = () => {
                   }
                 <Button onClick={() => setLabels([...labels,""])} icon={<PlusOutlined />}></Button>
               </Form.Item> */}
-          <div className="w-full text-center my-5">
+          <div className="w-full text-center justify-end">
             <button type="submit" className="primary mx-auto w-48 h-12">
               Submit
             </button>
           </div>
-        </form>
-      </div>
-
+        </PagedForm>
     </div>
   );
 };

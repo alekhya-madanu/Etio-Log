@@ -8,13 +8,12 @@ export default function layout({ children }) {
       <header className="w-full">
         <Header />
       </header>
-      <main className="flex flex-row h-full bg-gray-100 text-gray-800">
+      <main className="min-h-[98vh] flex flex-row h-full gradient-bg text-gray-800 dark:text-slate-200">
         {/* TODO: BreadCrumbs? */}
-        <aside className="min-h-[95vh]">
-          {" "}
-          <Sider />{" "}
-        </aside>
-        <section className="flex-grow max-w-screen-lg mx-auto">{children}</section>
+        <Sider />
+        <section className="md:flex-grow  max-w-screen-lg mx-auto p-4">
+          {children}
+        </section>
       </main>
       {/* TODO: Full footer */}
       <footer className="bg-gray-50 text-gray-800 text-center font-thin text-light-900 text-xs">
