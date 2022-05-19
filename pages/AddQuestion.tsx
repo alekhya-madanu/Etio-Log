@@ -50,7 +50,7 @@ const AddQuestion: NextPage = () => {
           time
         </h2>
         <PagedForm onSubmit={handleSubmit(onSubmit)}
-          className="mt-12 min-h-64 flex flex-col justify-between p-8 rounded-md bg-slate-900 bg-opacity-10 shadow-md dark:bg-opacity-30" >
+          className="mt-12 h-96 overflow-y-scroll flex flex-col justify-between p-8 rounded-md bg-slate-900 bg-opacity-10 shadow-md dark:bg-opacity-30">
           <InputWrapper
             name="metric"
             type="text"
@@ -61,14 +61,17 @@ const AddQuestion: NextPage = () => {
           />
           <div className="pl-12">
             {fields.map((option, i) => (
-              <InputWrapper
-                name={option.id}
-                key={option.id}
-                placeholder="Enter option"
-                // error={questionForm.errors?.options?.message}
-                register={register}
-                registerAs={`options.${i}.value`}
-              />
+              <div key={option.id}>
+                <InputWrapper
+                  name={option.id}
+                  placeholder="Enter option"
+                  // error={questionForm.errors?.options?.message}
+                  register={register}
+                  registerAs={`options.${i}.value`}
+                />
+                <p> How much does this option affect your {}?</p>
+                <div className="mx-auto">Slider</div>
+              </div>
             ))}
             <button
               className="inline my-1"
