@@ -50,16 +50,24 @@ const AddQuestion: NextPage = () => {
           time
         </h2>
         <PagedForm onSubmit={handleSubmit(onSubmit)}
-          className="mt-12 h-96 overflow-y-scroll flex flex-col justify-between p-8 rounded-md bg-slate-900 bg-opacity-10 shadow-md dark:bg-opacity-30">
-          <InputWrapper
-            name="metric"
-            type="text"
-            placeholder="Question"
-            // error={questionForm.errors?.metric?.message}
-            register={register}
-            autoFocus
-          />
-          <div className="pl-12">
+          className="mt-12 h-[65vh] md:h-[40em] rounded-md bg-slate-900 bg-opacity-10 shadow-md dark:bg-opacity-30">
+          <h1>Question</h1>
+          <h1>Question</h1>
+          <h1>Question</h1>
+          <h1>Question</h1>
+          <h1>Question</h1>
+          <div className="">
+            <h1>Question</h1>
+            <InputWrapper
+              name="metric"
+              type="text"
+              placeholder="Question"
+              // error={questionForm.errors?.metric?.message}
+              register={register}
+              autoFocus
+            />
+          </div>
+          <div>
             {fields.map((option, i) => (
               <div key={option.id}>
                 <InputWrapper
@@ -82,22 +90,6 @@ const AddQuestion: NextPage = () => {
               Add Option
             </button>
           </div>
-          {/* <button onClick={() => setOptions([...options,""])} icon={<PlusOutlined />}></button> */}
-
-          {/* <Form.Item label="Minimum" name="intensityLow">
-                  <InputNumber size="small" defaultValue={1} onChange={(event) => setLow(event) } />
-              </Form.Item>
-
-              <Form.Item label="Maximum" name="intensityHigh">
-              <InputNumber size="small" defaultValue={10} onChange={(event) => setHigh(event) } />
-              </Form.Item> */}
-
-          {/* <Form.Item label="IntensityLabels" name="intensityLabels">
-              {labels.map((label,i) => 
-                  <Input key={i} onChange={(event) => changeLabel(i,event.target.value)}/>)
-                  }
-                <Button onClick={() => setLabels([...labels,""])} icon={<PlusOutlined />}></Button>
-              </Form.Item> */}
         </PagedForm>
     </div>
   );

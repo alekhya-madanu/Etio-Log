@@ -49,4 +49,17 @@
     border-gray-300 dark:border-gray-600
     focus:text-gray-700 dark:focus:text-gray-200 focus:bg-white dark:focus:bg-slate-600 focus:border-blue-600 focus:outline-none;
   }
+
+  .standard-border {
+    @apply border-gray-400 border-t w-full;
+    @apply dark:border-gray-600;
+  }
+
+  .inactive-container {
+    @apply bg-gray-700 dark:bg-gray-300 text-gray-100 dark:text-gray-600;
+  }
+
+  .active-container {
+    @apply bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-300;
+  }
 }
