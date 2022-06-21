@@ -33,12 +33,15 @@ export default function Login(props: { login: boolean; onLogout: any }) {
   };
 
   return (
-    <button onClick={(e) => { e.preventDefault(); login ? handleLogout() : handleLogin(); }}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
-          focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0
-          dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      disabled={loading}>
-      <span>{login ? "Logout" : "Login with Google"}</span>
-    </button>
+    <div className="relative w-20 ">
+      <button onClick={(e) => { e.preventDefault(); login ? handleLogout() : handleLogin(); }}
+          className="text-white bg-blue-700 hover:bg-blue-800  focus:ring-4 focus:outline-none
+            focus:ring-blue-300 rounded-lg text-base w-full h-full text-center mr-3 md:mr-0
+            dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        disabled={loading}>
+        <span>{login ? "Logout" : "Login"}</span>
+      </button>
+
+    </div>
   );
 }

@@ -1,13 +1,25 @@
 @tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .gradient-bg {
+    @apply bg-gradient-to-br from-[#ded9e6] to-[#f5faff];
+    @apply dark:from-teal-900 dark:to-slate-900
+  }
+  .default-bg {
+    @apply bg-gray-100 dark:bg-slate-900;
+  }
+}
 
 @layer components {
   .sidebar-item {
-    @apply hover:bg-gray-100 transition-colors duration-300 ease-in-out rounded-md;
+    @apply hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-300 ease-in-out rounded-md;
   }
 
   h1.page-headline {
-    @apply text-3xl md:text-5xl font-medium mb-4 ml-1;
+    @apply text-3xl md:text-6xl font-medium mb-4 ml-1;
     @apply dark:text-slate-200;
+    @apply font-headline font-medium tracking-wide;
   }
 
   h2.page-subheadline {
@@ -15,11 +27,16 @@
     @apply dark:text-slate-300;
   }
 
-  button.primary {
+  button.primary, input.primary {
     @apply bg-orange-500 hover:bg-orange-600 text-white;
     @apply dark:bg-teal-700 dark:hover:bg-teal-600 text-white;
     @apply font-bold py-2 px-4 rounded-md;
     @apply transition-colors duration-500 ease-in-out;
+  }
+
+  input.pageform {
+    @apply bg-transparent border-b-2 border-gray-400 pt-4 pb-1 px-2 focus:outline-none;
+    @apply focus:border-gray-600;
   }
 
   button.inline {
@@ -28,15 +45,7 @@
     @apply font-bold py-2 px-4 rounded-md; 
   }
 
-  .gradient-bg {
-    @apply bg-gradient-to-br from-[#b0a9bc] to-[#eaebd5];
-    @apply dark:from-teal-900 dark:to-zinc-900
-  }
-  .default-bg {
-    @apply bg-gray-100 dark:bg-slate-900;
-  }
-
-  .input-wrapper-default {
+  iinput-wrapper-default {
     @apply my-1;
   }
 
@@ -62,4 +71,26 @@
   .active-container {
     @apply bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-300;
   }
+
+  .range-slider{
+    margin: 20px;
+    appearance: none;
+    outline: none;
+    width: 150px;
+    height: 3px;
+    border-radius: 5px;
+    background-color: #ccc;
+  }
+
+  .range-slide::-webkit-slider-runnable-track{
+    background-color: white;	
+  }
+  .range-slider::-webkit-slider-thumb {
+      background: #fafafa;
+      appearance: none;
+      box-shadow: 1px 2px 26px 1px #bdbdbd;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+    }
 }

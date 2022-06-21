@@ -12,7 +12,6 @@ const MainForm = () => {
           .from('MoodData')
           .select('*')
           .order('date')
-
         if (error) {
           console.error(error);
         } else {
