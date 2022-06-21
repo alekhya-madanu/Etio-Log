@@ -1,0 +1,60 @@
+import { Session } from '@supabase/supabase-js';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { supabase } from '../../lib/initSupabase';
+import Login from "../Login"
+
+export default function Header() {
+    const [session, setSession] = useState < Session | null > (null)
+    useEffect(() => {
+      setSession(supabase.auth.session())
+
+      supabase.auth.onAuthStateChange((_event, session) => {
+        setSession(session)
+      })
+    }, [])
+    const onLogout = () => setSession(null)
+
+    return (
+        <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 md:rounded dark:bg-gray-800">
+          <div className="container flex flex-wrap justify-between items-center mx-auto">
+            <a href="https://app.supabase.io" className="flex items-center">
+              <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+                  ETIO
+              </span>
+            </a>
+            <div
+              className="hidden justify-between items-center w-full md:flex md:w-auto"
+              id="mobile-menu-4"
+            >
+              <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-base md:font-medium">
+                <li>
+                    <span className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
+                    <Link href="/HomeForm" aria-current="page"> Home </Link>
+                    </span>
+                </li>
+                <li>
+                    <span className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                  <Link href="#" > About </Link>
+                    </span>
+                </li>
+                <li>
+                  <span className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" >
+                    <Link href="/ViewData">Data</Link>
+                  </span>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <Login login={session != null} onLogout={onLogout} /> 
+          </div>
+        </nav>
+    );
+}
