@@ -2,8 +2,8 @@ import { faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
-import { Option, Question, getQuestions, deleteQuestion } from "../lib/model/Question";
+import { useEffect, useState } from "react";
+import { Question, getQuestions, deleteQuestion } from "../lib/model/Question";
 
 type QuestionForm = {
   question: Question;
@@ -44,18 +44,17 @@ const Metrics: NextPage = () => {
               <div className="flex flex-wrap">
                 {question.options &&
                   question.options.map((option) => (
-                    <div key={option.id} className="w-1/2 md:w-1/3">
+                    <div key={option.id} className="text-xs font-light bg-blue-100 border border-gray-200 rounded px-4 py-1 mr-1 my-1">
                       {option.label}
                     </div>
                   ))}
               </div>
             </div>
-            <button
+            <button className="p-1 my-auto"
               onClick={async () => {
                 if (question.id) await deleteQuestion(question.id);
                 setQuestions(questions.filter((q) => q.id !== question.id));
-              }}
-            >
+              }}>
               <FontAwesomeIcon icon={faTrashCan} />
             </button>
           </div>

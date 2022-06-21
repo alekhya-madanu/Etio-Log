@@ -4,6 +4,7 @@ import HomeForm from './HomeForm';
 
 const Home: NextPage = () => {
 // const [state, setState] = useState({collapsed: false})
+    // @ts-ignore
     return <HomeForm/>;
 }
 

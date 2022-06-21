@@ -8,6 +8,7 @@ import Layout from '../components/Layout/DefaultLayout'
 config.autoAddCss = false;
 function MyApp({ Component, pageProps }: AppProps) {
   return <Layout>
+    {/* @ts-ignore */}
     <Component {...pageProps} />
   </Layout>
 }
